@@ -85,7 +85,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+  {
+    title: 'Programming is fun but sometimes fustrating!',
+    date:  '4th September, 2019',
+    firstParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+          Ornare lectus sit amet est placerat. Pharetra magna ac placerat vestibulum lectus mauris ultrices eros. Cursus sit amet dictum sit amet justo.
+          Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Ultrices neque ornare aenean euismod elementum nisi quis eleifend. 
+          Cursus risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. In est ante in nibh mauris cursus. Volutpat ac tincidunt vitae semper
+          quis lectus. Natoque penatibus et magnis dis parturient montes nascetur.`,
+    secondParagraph: `Ultrices gravida dictum fusce ut placerat orci. Risus nullam eget felis eget nunc lobortis. In nibh mauris cursus mattis molestie.
+          Eget mauris pharetra et ultrices neque ornare aenean. Urna et pharetra pharetra massa massa ultricies mi quis hendrerit. Varius morbi enim nunc
+          faucibus a pellentesque. Congue eu consequat ac felis. Consequat interdum varius sit amet mattis vulputate enim nulla. Sit amet cursus sit amet 
+          dictum sit amet. Luctus accumsan tortor posuere ac ut consequat semper viverra nam.`,
+    thirdParagraph: `Sed viverra tellus in hac habitasse platea. Sed augue lacus viverra vitae congue eu consequat ac. Egestas integer eget aliquet nibh praesent.
+          Dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida. Integer eget aliquet nibh praesent tristique magna. Sed felis eget velit aliquet 
+          sagittis id. Pellentesque sit amet porttitor eget dolor morbi. Nisl nunc mi ipsum faucibus vitae. Diam ut venenatis tellus in metus vulputate eu. Mauris
+          cursus mattis molestie a. Elementum nibh tellus molestie nunc non. `
+    }
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -102,13 +119,56 @@ const data = [
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
-
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
-
-  Step 3: return the entire component.
-
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
-
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
-
 */
+
+function articleCreator({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
+const article = document.createElement('article');
+const h2 = document.createElement('h2');
+const dateP = document.createElement('p');
+const p1 = document.createElement('p');
+const p2 = document.createElement('p');
+const p3 = document.createElement('p');
+const button = document.createElement('span');
+
+dateP.textContent = date;
+p1.textContent = firstParagraph;
+p2.textContent = secondParagraph;
+p3.textContent = thirdParagraph;
+button.textContent = 'Expand/Collapse';
+
+article.classList.add('article');
+article.classList.add('article-open');
+dateP.classList.add('date');
+h2.textContent = title;
+button.classList.add('expandButton');
+
+// Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+button.addEventListener('click', e => {
+  article.classList.toggle('article-open');
+});
+
+article.appendChild(h2);
+article.appendChild(dateP);
+article.appendChild(p1);
+article.appendChild(p2);
+article.appendChild(p3);
+article.appendChild(button);
+
+//  Step 3: return the entire component.
+return article;
+}
+
+// Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+const articles = data.map(articleCreator);
+
+const articlesContainer = document.querySelector('.articles');
+
+articles.forEach((element) => {
+articlesContainer.appendChild(element);
+});
+
+
+// Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+
+
+
