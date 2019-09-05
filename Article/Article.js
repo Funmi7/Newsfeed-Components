@@ -147,12 +147,10 @@ button.addEventListener('click', e => {
   article.classList.toggle('article-open');
 });
 
-article.appendChild(h2);
-article.appendChild(dateP);
-article.appendChild(p1);
-article.appendChild(p2);
-article.appendChild(p3);
-article.appendChild(button);
+let elements = [h2, dateP, p1, p2, p3, button] ;
+elements.map((element => {
+  article.appendChild(element);
+}));
 
 //  Step 3: return the entire component.
 return article;

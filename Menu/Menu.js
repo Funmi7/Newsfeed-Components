@@ -26,7 +26,6 @@ let menuItems = [
     const ul = document.createElement('ul');
     const header = document.querySelector('.header');
   
-
     header.appendChild(menuDiv);
     menuDiv.classList.add('menu');
 
